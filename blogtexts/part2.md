@@ -30,4 +30,39 @@ class PostPage(Page):
 python manage.py makemigrations
 python manage.py migrate
 
+in the admin create a test blog-page and post-page
+
+Also create these files:
+
+Create blog/templates/blog/blog_page.html
+
+{% load wagtailcore_tags %}
+
+{% block content %}
+    <h1>{{ page.title }}</h1>
+
+    <div class="intro">{{ page.description }}</div>
+
+    {% for post in page.get_children %}
+        <h2><a href="{% pageurl post %}">{{ post.title }}</a></h2>
+    {% endfor %}
+
+{% endblock %}
+
+Create blog/templates/blog/post_page.html
+
+{% load wagtailcore_tags %}
+
+{% block content %}
+    <h1>{{ page.title }}</h1>
+
+    {{ page.body|richtext }}
+
+    <p><a href="{{ page.get_parent.url }}">Return to blog</a></p>
+
+{% endblock %}
+
+
+You should now be able to visit these test pages.
+
 

@@ -1,18 +1,22 @@
-from django.db import models
-from django import forms
-from datetime import datetime
 
-from modelcluster.fields import ParentalKey, ParentalManyToManyField
-from modelcluster.tags import ClusterTaggableManager
+You don't need to this step in wagtail >=2.6.2
+add to settings/base.py
 
-from wagtail.core.models import Page
-from wagtail.core.fields import RichTextField
-from wagtail.admin.edit_handlers import FieldPanel
-from wagtail.snippets.models import register_snippet
+INSTALLED_APPS = [
+...
+ "wagtail.contrib.routable_page",
+...
+]
+if you are using an earlier version of wagtail, check at this link:
+http://docs.wagtail.io/en/v2.6.2/reference/contrib/routablepage.html 
+selecting the version you're using in the right hand corner to see the name you need to import.
+
+in blog/models.py add:
+
 from wagtail.contrib.routable_page.models import RoutablePageMixin, route
 
-from taggit.models import TaggedItemBase, Tag as TaggitTag
 
+and change the BlogPage model to:
 
 class BlogPage(RoutablePageMixin, Page):
     """
@@ -54,6 +58,12 @@ class BlogPage(RoutablePageMixin, Page):
         return Page.serve(self, request, *args, **kwargs)
 
 
+
+also add:
+from datetime import datetime
+
+add date to PostPage:
+
 class PostPage(Page):
     body = RichTextField(blank=True)
     date = models.DateTimeField(
@@ -83,30 +93,67 @@ class PostPage(Page):
         return context
 
 
-@register_snippet
-class BlogCategory(models.Model):
-    name = models.CharField(max_length=255)
-    slug = models.SlugField(unique=True, max_length=80)
+We can now simplify the blog_page.html:
 
-    panels = [
-        FieldPanel('name'),
-        FieldPanel('slug'),
-    ]
+{% load wagtailcore_tags %}
 
-    def __str__(self):
-        return self.name
+{% block content %}
+    <h1>{{ blog_page.title }}</h1>
 
-    class Meta:
-        verbose_name = "Category"
-        verbose_name_plural = "Categories"
+    <div class="intro">{{ blog_page.description }}</div>
+
+    {% for post in posts %}
+        <h2><a href="{% pageurl post %}">{{ post.title }}</a></h2>
+    {% endfor %}
+
+{% endblock %}
 
 
-class BlogPageTag(TaggedItemBase):
-    content_object = ParentalKey('PostPage', related_name='post_tags')
+
+and edit post_page.html:
+
+{% load wagtailcore_tags wagtailroutablepage_tags%}
+
+{% block content %}
+    <h1>{{ page.title }}</h1>
+
+    {{ page.body|richtext }}
+
+    <p><a href="{{ page.get_parent.url }}">Return to blog</a></p>
+
+{% endblock %}
 
 
-@register_snippet
-class Tag(TaggitTag):
+{% if page.tags.all.count %}
+    <div class="tags">
+        <h3>Tags</h3>
+        {% for tag in page.tags.all %}
+            <a href="{% routablepageurl blog_page "post_by_tag" tag.slug %}">{{ tag }}</a>
+        {% endfor %}
+    </div>
+{% endif %}
 
-    class Meta:
-        proxy = True
+{% with categories=page.categories.all %}
+    {% if categories %}
+        <h3>Categories</h3>
+        <ul>
+            {% for category in categories %}
+                <li style="display: inline">
+                    <a href="{% routablepageurl blog_page "post_by_category" category.slug %}">{{ category.name }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endwith %}
+
+
+We can also update post_page.html so it's a bit clearer:
+
+{% block content %}
+    <h1>{{ post.title }}</h1>
+
+    {{ post.body|richtext }}
+
+    <p><a href="{{ post.get_parent.url }}">Return to blog</a></p>
+
+{% endblock %}

@@ -50,6 +50,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'blog',
+
+    "wagtail.contrib.routable_page",
 ]
 
 MIDDLEWARE = [

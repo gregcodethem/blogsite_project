@@ -9,6 +9,7 @@ verify_ssl = true
 wagtail = "*"
 django-el-pagination = "*"
 markdown = "*"
+wagtailmenus = "*"
 
 [requires]
 python_version = "3.7"

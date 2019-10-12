@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "85abb56a0a4e9a1728bbdc5c600da245859d9951d1f07a63018982d9b1c986a7"
+            "sha256": "248d29d8f3c4e9feed989f10a65dbacf0dbe4ec2f1721b39743e62ddf3d32930"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -44,6 +44,13 @@
                 "sha256:a8ca1033acac9f33995eb2209a6bf18a4681c3e5269a878e9a7e0b7384ed1ca3"
             ],
             "version": "==2.2.6"
+        },
+        "django-cogwheels": {
+            "hashes": [
+                "sha256:53942daafeac4db35dd2a9772597701f94ac29944026d51c1b03687e2b42be66",
+                "sha256:dab05326be02250f3ccbaabfcac4e65333f9f437b250099aaf81e6aed09e9a4c"
+            ],
+            "version": "==0.2"
         },
         "django-el-pagination": {
             "hashes": [
@@ -187,6 +194,14 @@
             ],
             "index": "pypi",
             "version": "==2.6.2"
+        },
+        "wagtailmenus": {
+            "hashes": [
+                "sha256:a22fa5b5b5ea8084271f87a3562b9bcedd199bd64a36f67025acbfc795360f04",
+                "sha256:f1f4d7f3e048f9cc973feccf4f746474e5948e546c39096f2234d2735fe64c8d"
+            ],
+            "index": "pypi",
+            "version": "==2.13.1"
         },
         "webencodings": {
             "hashes": [

@@ -52,6 +52,8 @@ INSTALLED_APPS = [
     'blog',
     'wagtailmd',
     'el_pagination',
+    'wagtail.contrib.modeladmin',
+    'wagtailmenus',
 
     "wagtail.contrib.routable_page",
 ]
@@ -84,6 +86,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+
+                'wagtailmenus.context_processors.wagtailmenus',
             ],
         },
     },

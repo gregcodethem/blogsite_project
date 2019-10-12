@@ -14,6 +14,7 @@ from wagtail.contrib.routable_page.models import RoutablePageMixin, route
 from taggit.models import TaggedItemBase, Tag as TaggitTag
 from wagtailmd.utils import MarkdownField, MarkdownPanel
 
+
 class BlogPage(RoutablePageMixin, Page):
     """
     RoutablePageMixin has to come before Page
@@ -29,6 +30,8 @@ class BlogPage(RoutablePageMixin, Page):
         context = super(BlogPage, self).get_context(request, *args, **kwargs)
         context['posts'] = self.posts
         context['blog_page'] = self
+        context['menuitems'] = self.get_children().filter(
+            live=True, show_in_menus=True)
         return context
 
     def get_posts(self):

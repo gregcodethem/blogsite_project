@@ -7,6 +7,8 @@ verify_ssl = true
 
 [packages]
 wagtail = "*"
+django-el-pagination = "*"
+markdown = "*"
 
 [requires]
 python_version = "3.7"

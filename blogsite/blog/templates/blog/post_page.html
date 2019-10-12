@@ -1,33 +1,48 @@
-{% load wagtailcore_tags wagtailroutablepage_tags %}
+{% extends "blog/base.html" %}
+{% load static wagtailcore_tags wagtailimages_tags blogapp_tags wagtailmd %}
+
+{% block title %}{{ self.title }} | {{ blog_page.title }}{% endblock title %}
+{% block meta_title %}{% if self.seo_title %}{{ self.seo_title }}{% else %}{{ self.title }}{% endif %}{% endblock meta_title %}
+{% block meta_description %}{% if self.search_description %}{{ self.search_description }}{% else %}{{ self.body|striptags|truncatewords:20 }}{% endif %}{% endblock meta_description %}
+{% block canonical %}{% canonical_url self%}{% endblock canonical %}
 
 {% block content %}
+    {% if post.header_image %}
+        {% image post.header_image original as header_image %}
+        <img src="{{ header_image.url }}" class="img-fluid rounded" ></img>
+        <hr>
+    {% endif %}
     <h1>{{ post.title }}</h1>
 
-    {{ post.body|richtext }}
+    <p>
+        <i class="far fa-clock"></i> {{post.date}} &nbsp;
+        <i class="far fa-user"></i> {{post.owner}} &nbsp;
+        {% post_categories %}
+    </p>
+    <hr>
 
-    <p><a href="{{ post.get_parent.url }}">Return to blog</a></p>
+    {{ post.body|markdown|safe }}
+    <hr>
+
+    {% post_tags_list %}
+
+    {% show_comments %}
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX", "output/HTML-CSS"],
+        tex2jax: {
+          inlineMath: [['$','$']],
+          displayMath: [['$$','$$']] ,
+          processEscapes: true
+        },
+        "HTML-CSS": { availableFonts: ["TeX"] }
+      });
+    </script>
+
+    <script type="text/javascript"
+       src="//cdn.mathjax.org/mathjax/latest/MathJax.js">
+    </script>
 
 {% endblock %}
-
-
-{% if page.tags.all.count %}
-    <div class="tags">
-        <h3>Tags</h3>
-        {% for tag in page.tags.all %}
-            <a href="{% routablepageurl blog_page "post_by_tag" tag.slug %}">{{ tag }}</a>
-        {% endfor %}
-    </div>
-{% endif %}
-
-{% with categories=page.categories.all %}
-    {% if categories %}
-        <h3>Categories</h3>
-        <ul>
-            {% for category in categories %}
-                <li style="display: inline">
-                    <a href="{% routablepageurl blog_page "post_by_category" category.slug %}">{{ category.name }}</a>
-                </li>
-            {% endfor %}
-        </ul>
-    {% endif %}
-{% endwith %}

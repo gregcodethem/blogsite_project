@@ -50,6 +50,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'blog',
+    'wagtailmd',
+    'el_pagination',
 
     "wagtail.contrib.routable_page",
 ]

@@ -10,6 +10,8 @@ wagtail = "*"
 django-el-pagination = "*"
 markdown = "*"
 wagtailmenus = "*"
+django-compressor = "*"
+django-libsass = "==0.7"
 
 [requires]
 python_version = "3.7"

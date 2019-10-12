@@ -47,3 +47,13 @@ pipenv install Markdown
 pipenv install wagtailmenus
 
 $ python manage.py migrate wagtailmenus
+
+
+that's all tutorial 12
+
+
+now the extra tutorial - run scss the python way
+
+pipenv install django_compressor
+pipenv install django-libsass
+

@@ -57,3 +57,28 @@ now the extra tutorial - run scss the python way
 pipenv install django_compressor
 pipenv install django-libsass
 
+
+
+tutorial 9
+
+pipenv install Pygments
+
+and edited wagtailmd/templatetags/wagtailmd.py
+
+Not finished tutorial 9
+
+
+Tutorial 10
+
+Go through all, also in models.py, make sure PostPage model has context:
+
+    def get_context(self, request, *args, **kwargs):
+        context = super(PostPage, self).get_context(request, *args, **kwargs)
+        context['blog_page'] = self.blog_page
+        context['post'] = self
+        return context
+
+Mine was missing the context['post'] line which was referred to in a django error.
+
+It seems it was this context['post'] part that was causing the errors before.
+

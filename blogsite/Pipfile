@@ -12,6 +12,7 @@ markdown = "*"
 wagtailmenus = "*"
 django-compressor = "*"
 django-libsass = "==0.7"
+pygments = "*"
 
 [requires]
 python_version = "3.7"

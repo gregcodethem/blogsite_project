@@ -10,6 +10,8 @@ from wagtail.core.fields import RichTextField
 from wagtail.admin.edit_handlers import FieldPanel
 from wagtail.snippets.models import register_snippet
 from wagtail.contrib.routable_page.models import RoutablePageMixin, route
+from wagtail.images.edit_handlers import ImageChooserPanel
+
 
 from taggit.models import TaggedItemBase, Tag as TaggitTag
 from wagtailmd.utils import MarkdownField, MarkdownPanel
@@ -95,11 +97,25 @@ class PostPage(Page):
         verbose_name="Post date",
         default=datetime.today
     )
+
+    excerpt = MarkdownField(
+        verbose_name='excerpt', blank=True,
+    )
+
+    header_image = models.ForeignKey(
+        'wagtailimages.Image',
+        null=True, blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+',
+    )
+
     categories = ParentalManyToManyField('blog.BlogCategory', blank=True)
     tags = ClusterTaggableManager(through='blog.BlogPageTag', blank=True)
 
     content_panels = Page.content_panels + [
+        ImageChooserPanel('header_image'),
         MarkdownPanel("body"),
+        MarkdownPanel("excerpt"),
         FieldPanel('categories', widget=forms.CheckboxSelectMultiple),
         FieldPanel('tags'),
     ]
@@ -115,6 +131,7 @@ class PostPage(Page):
     def get_context(self, request, *args, **kwargs):
         context = super(PostPage, self).get_context(request, *args, **kwargs)
         context['blog_page'] = self.blog_page
+        context['post'] = self
         return context
 
 

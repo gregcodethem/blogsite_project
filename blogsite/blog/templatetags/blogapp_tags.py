@@ -75,9 +75,10 @@ def show_comments(context):
         "",
         ""
     ])
+    rel_path = abs_path[len(blog_page.url):]
 
     return {'disqus_url': abs_path,
-            'disqus_identifier': post.pk,
+            'disqus_identifier': rel_path,
             'request': context['request']}
 
 

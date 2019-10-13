@@ -24,8 +24,12 @@ BASE_DIR = os.path.dirname(PROJECT_DIR)
 # Application definition
 
 INSTALLED_APPS = [
-    'home',
-    'search',
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
 
     'wagtail.contrib.forms',
     'wagtail.contrib.redirects',
@@ -39,25 +43,20 @@ INSTALLED_APPS = [
     'wagtail.admin',
     'wagtail.core',
 
-    'modelcluster',
-    'taggit',
-
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-
-    'blog',
-    'wagtailmd',
-    'el_pagination',
-    'wagtail.contrib.modeladmin',
-    'wagtailmenus',
-
+    'wagtail.contrib.settings',
     "wagtail.contrib.routable_page",
 
+    'modelcluster',
+    'taggit',
     'compressor',
+    'el_pagination',
+
+    'wagtail.contrib.modeladmin',  # Don't repeat if it's there already
+    'wagtailmenus',
+
+    'home',
+    'blog',
+    'wagtailmd',
 ]
 
 MIDDLEWARE = [
@@ -154,6 +153,7 @@ STATICFILES_FINDERS = [
 
 COMPRESS_PRECOMPILERS = (
     ('text/x-scss', 'django_libsass.SassCompiler'),
+    ('text/x-sass', 'django_libsass.SassCompiler'),
 )
 
 STATICFILES_DIRS = [

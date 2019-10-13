@@ -56,6 +56,38 @@ class BlogPage(RoutablePageMixin, Page):
         self.posts = self.get_posts()
         return Page.serve(self, request, *args, **kwargs)
 
+    @route(r'^(\d{4})/$')
+    @route(r'^(\d{4})/(\d{2})/$')
+    @route(r'^(\d{4})/(\d{2})/(\d{2})/$')
+    def post_by_date(self, request, year, month=None, day=None, *args, **kwargs):
+        self.posts = self.get_posts().filter(date__year=year)
+        if month:
+            self.posts = self.posts.filter(date__month=month)
+            df = DateFormat(date(int(year), int(month), 1))
+            self.search_term = df.format('F Y')
+        if day:
+            self.posts = self.posts.filter(date__day=day)
+            self.search_term = date_format(
+                date(int(year), int(month), int(day)))
+        return Page.serve(self, request, *args, **kwargs)
+
+    @route(r'^(\d{4})/(\d{2})/(\d{2})/(.+)/$')
+    def post_by_date_slug(self, request, year, month, day, slug, *args, **kwargs):
+        post_page = self.get_posts().filter(slug=slug).first()
+        if not post_page:
+            raise Http404
+        return Page.serve(post_page, request, *args, **kwargs)
+
+    @route(r'^search/$')
+    def post_search(self, request, *args, **kwargs):
+        search_query = request.GET.get('q', None)
+        self.posts = self.get_posts()
+        if search_query:
+            self.posts = self.posts.filter(body__contains=search_query)
+            self.search_term = search_query
+            self.search_type = 'search'
+        return Page.serve(self, request, *args, **kwargs)
+
 
 class PostPage(Page):
     body = MarkdownField()

@@ -1,5 +1,4 @@
 {% extends "blog/base.html" %}
-
 {% load static wagtailcore_tags wagtailimages_tags blogapp_tags wagtailmd %}
 
 {% block title %}{{ self.title }} | {{ blog_page.title }}{% endblock title %}
@@ -18,14 +17,16 @@
     <p>
         <i class="far fa-clock"></i> {{post.date}} &nbsp;
         <i class="far fa-user"></i> {{post.owner}} &nbsp;
-
+        {% post_categories %}
     </p>
     <hr>
 
     {{ post.body|markdown|safe }}
     <hr>
 
+    {% post_tags_list %}
 
+    {% show_comments %}
 
     <script type="text/x-mathjax-config">
       MathJax.Hub.Config({

@@ -8,17 +8,54 @@ from modelcluster.tags import ClusterTaggableManager
 from wagtail.core.models import Page
 from wagtail.core.fields import RichTextField, StreamField
 from wagtail.core import blocks
-from wagtail.admin.edit_handlers import FieldPanel, InlinePanel, StreamFieldPanel
+from wagtail.admin.edit_handlers import (FieldPanel, InlinePanel,
+                                         StreamFieldPanel, MultiFieldPanel, FieldRowPanel)
 from wagtail.snippets.models import register_snippet
 from wagtail.contrib.routable_page.models import RoutablePageMixin, route
 from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.images.blocks import ImageChooserBlock
 from wagtail.embeds.blocks import EmbedBlock
+from wagtail.contrib.forms.models import AbstractEmailForm, AbstractFormField
 
 
 from taggit.models import TaggedItemBase, Tag as TaggitTag
 from wagtailmd.utils import MarkdownField, MarkdownPanel
 from blog.blocks import TwoColumnBlock
+
+
+class FormField(AbstractFormField):
+    page = ParentalKey('FormPage', related_name='custom_form_fields')
+
+
+class FormPage(AbstractEmailForm):
+    thank_you_text = RichTextField(blank=True)
+
+    content_panels = AbstractEmailForm.content_panels + [
+        InlinePanel('custom_form_fields', label="Form fields"),
+        FieldPanel('thank_you_text', classname="full"),
+        MultiFieldPanel([
+            FieldRowPanel([
+                FieldPanel('from_address', classname="col6"),
+                FieldPanel('to_address', classname="col6"),
+            ]),
+            FieldPanel('subject'),
+        ], "Email Notification Config"),
+    ]
+
+    def get_form_fields(self):
+        return self.custom_form_fields.all()
+
+    def get_context(self, request, *args, **kwargs):
+        context = super(FormPage, self).get_context(request, *args, **kwargs)
+        context['blog_page'] = self.blog_page
+        return context
+
+    def get_form_fields(self):
+        return self.custom_form_fields.all()
+
+    @property
+    def blog_page(self):
+        return self.get_parent().specific
 
 
 class BlogPage(RoutablePageMixin, Page):
@@ -175,8 +212,17 @@ class LandingPage(Page):
         ('image', ImageChooserBlock(icon="image")),
         ('two_columns', TwoColumnBlock()),
         ('embedded_video', EmbedBlock(icon="media")),
-    ],null=True,blank=True)
+    ], null=True, blank=True)
 
     content_panels = Page.content_panels + [
         StreamFieldPanel('body'),
     ]
+
+    @property
+    def blog_page(self):
+        return self.get_parent().specific
+
+    def get_context(self, request, *args, **kwargs):
+        context = super(LandingPage, self).get_context(request, *args, **kwargs)
+        context['blog_page'] = self.blog_page
+        return context

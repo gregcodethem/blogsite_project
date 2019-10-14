@@ -75,6 +75,9 @@ def show_comments(context):
         "",
         ""
     ])
+    
+    # Find the relative path from the absolute path
+    # For the disqus identifier
     rel_path = abs_path[len(blog_page.url):]
 
     return {'disqus_url': abs_path,

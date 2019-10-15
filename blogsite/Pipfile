@@ -14,6 +14,7 @@ django-compressor = "*"
 django-libsass = "==0.7"
 pygments = "*"
 django-widget-tweaks = "*"
+wagtailcodeblock = "*"
 
 [requires]
 python_version = "3.7"

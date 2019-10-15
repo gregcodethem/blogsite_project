@@ -25,6 +25,20 @@
     {{ post.body|markdown|safe }}
     <hr>
 
+    {% for block in post.body_stream %}
+      {% if block.block_type == 'heading' %}
+        <h1>{{ block.value }}</h1>
+      {% elif block.block_type == 'paragraph' %}
+        <p>{{ block.value }}</p>
+      {% elif block.block_type == 'image' %}
+        <div style="float: left; margin: 10px">
+          {% image block.value fill-320x240 %}
+        </div>
+        {% elif block.block_type == 'code' %}
+            {{ block }}
+      {% endif %}
+    {% endfor %}
+
     {% show_comments %}
 
     <script type="text/x-mathjax-config">
@@ -43,5 +57,7 @@
     <script type="text/javascript"
        src="//cdn.mathjax.org/mathjax/latest/MathJax.js">
     </script>
+
+    <script src="{% static 'js/prism.js' %}"></script>
 
 {% endblock %}

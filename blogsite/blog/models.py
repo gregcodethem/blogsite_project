@@ -17,10 +17,12 @@ from wagtail.images.blocks import ImageChooserBlock
 from wagtail.embeds.blocks import EmbedBlock
 from wagtail.contrib.forms.models import AbstractEmailForm, AbstractFormField
 
+from wagtailcodeblock.blocks import CodeBlock
 
 from taggit.models import TaggedItemBase, Tag as TaggitTag
 from wagtailmd.utils import MarkdownField, MarkdownPanel
 from blog.blocks import TwoColumnBlock
+
 
 
 class FormField(AbstractFormField):
@@ -138,6 +140,13 @@ class PostPage(Page):
         verbose_name="Post date",
         default=datetime.today
     )
+    body_stream = StreamField([
+            ('heading', blocks.CharBlock(classname='full title')),
+            ('paragraph', blocks.RichTextBlock()),
+            ('image', ImageChooserBlock()),
+            ('code', CodeBlock())
+        ],
+        blank=True)
 
     excerpt = MarkdownField(
         verbose_name='excerpt', blank=True,
@@ -157,6 +166,7 @@ class PostPage(Page):
         ImageChooserPanel('header_image'),
         MarkdownPanel("body"),
         MarkdownPanel("excerpt"),
+        StreamFieldPanel("body_stream"),
         FieldPanel('categories', widget=forms.CheckboxSelectMultiple),
         FieldPanel('tags'),
     ]

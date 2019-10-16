@@ -59,6 +59,8 @@ INSTALLED_APPS = [
     'blog',
     'wagtailmd',
     'wagtailcodeblock',
+
+    'wagtailnetlify',
 ]
 
 MIDDLEWARE = [
@@ -195,3 +197,5 @@ WAGTAIL_CODE_BLOCK_LANGUAGES = (
     ('scss', 'SCSS'),
     ('yaml', 'YAML'),
 )
+
+NETLIFY_PATH = '/usr/local/bin/netlify'

@@ -1,0 +1,13 @@
+version: '3.7'
+
+services:
+  web:
+    build: ./blogsite
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - ./blogsite/:/usr/src/blogsite/
+    ports:
+      - 8000:8000
+    environment:
+      - DEBUG=1
+      - SECRET_KEY=foo

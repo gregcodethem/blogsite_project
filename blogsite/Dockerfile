@@ -14,18 +14,18 @@ COPY ./requirements.txt /blogsite/requirements.txt
 RUN pip install --upgrade pip
 # Install any needed packages specified in requirements.txt
 RUN pip install -r /blogsite/requirements.txt
-# RUN pip install gunicorn
+RUN pip install gunicorn
 
 # Copy the current directory contents into the container at /code/
 # Edited to follow tutorial
-COPY . /usr/src/code/
+COPY . /usr/src/blogsite/
 # Set the working directory to /code/
-#WORKDIR /code/
+#WORKDIR /usr/src/blogsite/
 
 #RUN python manage.py migrate
 
 #RUN useradd wagtail
-#RUN chown -R wagtail /code
+#RUN chown -R wagtail /usr/src/blogsite
 #USER wagtail
 
 #EXPOSE 8000

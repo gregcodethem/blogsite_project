@@ -3,4 +3,7 @@ version: '3.7'
 services:
   web:
     build: ./blogsite
-    command: gunicorn hello_django.ws
+    command: gunicorn hello_django.wsgi:application --bind 0.0.0.0:8000
+    ports:
+      - 8000:8000
+    

@@ -10,11 +10,11 @@ WORKDIR /usr/src/blogsite
 ENV PYTHONUNBUFFERED 1
 ENV DJANGO_ENV dev
 
-COPY ./requirements.txt /code/requirements.txt
+COPY ./requirements.txt /blogsite/requirements.txt
 RUN pip install --upgrade pip
 # Install any needed packages specified in requirements.txt
 RUN pip install -r /blogsite/requirements.txt
-#RUN pip install gunicorn
+# RUN pip install gunicorn
 
 # Copy the current directory contents into the container at /code/
 # Edited to follow tutorial

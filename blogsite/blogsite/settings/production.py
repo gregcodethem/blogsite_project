@@ -1,12 +1,24 @@
 from .base import *
 
 DEBUG = False
+#DEBUG = True
+
+SECRET_KEY = 'change_me'
 
 try:
     from .local import *
 except ImportError:
     pass
 
-COMPRESS_OFFLINE = True
-LIBSASS_OUTPUT_STYLE = 'compressed'
-STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
+try:
+    from .env import SECRET_KEY
+except ImportError:
+    pass
+
+ALLOWED_HOSTS = ['.gregshepley.com']
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+#COMPRESS_OFFLINE = True
+#LIBSASS_OUTPUT_STYLE = 'compressed'
+#STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'

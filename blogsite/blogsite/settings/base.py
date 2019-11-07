@@ -149,7 +149,7 @@ USE_TZ = True
 STATICFILES_FINDERS = [
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-
+    
     'compressor.finders.CompressorFinder',
 ]
 
@@ -160,6 +160,7 @@ COMPRESS_PRECOMPILERS = (
 
 STATICFILES_DIRS = [
     os.path.join(PROJECT_DIR, 'static'),
+   # os.path.join(BASE_DIR, 'static'),
 ]
 
 # ManifestStaticFilesStorage is recommended in production, to prevent outdated
@@ -167,8 +168,9 @@ STATICFILES_DIRS = [
 # See https://docs.djangoproject.com/en/2.2/ref/contrib/staticfiles/#manifeststaticfilesstorage
 STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_ROOT = '/home/gregname/gregshepley.com/public/static'
 STATIC_URL = '/static/'
+#STATIC_URL = 'http://www.gregshepley.com/blogsite_project/blogsite/static/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'

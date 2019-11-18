@@ -1,5 +1,5 @@
-{% extends "base.html" %}
-{% load static %}
+{% extends "blog/under_base.html" %}
+{% load static wagtailcore_tags wagtailimages_tags wagtailuserbar blogapp_tags el_pagination_tags menu_tags compress wagtailmd %}
 
 {% block body_class %}template-homepage{% endblock %}
 
@@ -17,5 +17,19 @@ Delete the line below if you're just getting started and want to remove the welc
 Delete the line below if you're just getting started and want to remove the welcome screen!
 {% endcomment %}
 	<h1>{{ self.title }}</h1>
+	  <!-- Page Content -->
+  <div class="container">
+      {% for row in social_media_setting.testimonial %}
+      <div class="row mb-5">
+        <div class="col-md-6">
+          {% image row.value.image original as row_image %}
+          <img class="img-fluid rounded mb-3 mb-md-0" src="{{ row_image.url }}" alt="">
+        </div>
+        <div class="col-md-6">
+          {{ row.value.paragraph|richtext }}
+        </div>
+      </div>
+      {% endfor %}
+  </div>
 
 {% endblock content %}

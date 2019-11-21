@@ -172,7 +172,8 @@ STATIC_ROOT = '/home/gregname/gregshepley.com/public/static'
 STATIC_URL = '/static/'
 #STATIC_URL = 'http://www.gregshepley.com/blogsite_project/blogsite/static/'
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+#MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = '/home/gregname/gregshepley.com/public/media'
 MEDIA_URL = '/media/'
 
 

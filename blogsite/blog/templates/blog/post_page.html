@@ -9,8 +9,7 @@
 
 {% block content %}
     {% if post.header_image %}
-        {% image post.header_image original as header_image %}
-        <img src="{{ header_image.url }}" class="img-fluid rounded" ></img>
+       
         <hr>
     {% endif %}
     <h1>{{ post.title }}</h1>
@@ -57,7 +56,5 @@
     <script type="text/javascript"
        src="//cdn.mathjax.org/mathjax/latest/MathJax.js">
     </script>
-
-    <script src="{% static 'js/prism.js' %}"></script>
 
 {% endblock %}

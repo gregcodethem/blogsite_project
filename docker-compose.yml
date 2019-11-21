@@ -8,5 +8,7 @@ services:
       - ./blogsite/:/usr/src/blogsite/
     ports:
       - 8000:8000
-    env_file:
-      - ./.env.dev
+    environment:
+      - DEBUG=1
+      - SECRET_KEY=foo
+

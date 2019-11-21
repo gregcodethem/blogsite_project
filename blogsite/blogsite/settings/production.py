@@ -1,9 +1,9 @@
 from .base import *
+from .env import SECRET_KEY
 
 DEBUG = False
 #DEBUG = True
 
-SECRET_KEY = 'change_me'
 
 try:
     from .local import *

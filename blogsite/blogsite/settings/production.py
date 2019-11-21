@@ -4,6 +4,9 @@ from .env import SECRET_KEY
 DEBUG = False
 #DEBUG = True
 
+STATIC_ROOT = '/home/gregname/gregshepley.com/public/static'
+
+MEDIA_ROOT = '/home/gregname/gregshepley.com/public/media'
 
 try:
     from .local import *

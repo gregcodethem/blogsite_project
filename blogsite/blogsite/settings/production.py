@@ -18,7 +18,7 @@ try:
 except ImportError:
     pass
 
-ALLOWED_HOSTS = ['.gregshepley.com']
+ALLOWED_HOSTS = ['.gregshepley.com','.staging.gregshepley.com']
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 

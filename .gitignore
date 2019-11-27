@@ -4,4 +4,5 @@ env
 blogsite/static/CACHE
 blogsite/static
 blogsite/blogsite/settings/env.py
+blogsite/db.sqlite3
 

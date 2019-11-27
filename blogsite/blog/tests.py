@@ -29,7 +29,7 @@ class SettingsTest(TestCase):
 
         STATIC_ROOT_LIVE = '/home/gregname/gregshepley.com/public/static'
         STATIC_ROOT_STAGE = '/home/gregstage/staging.gregshepley.com/public/static'
-        STATIC_ROOT_LOCAL = '/home/gregshepley/code/projects/blogsite_project/blogsite'
+        STATIC_ROOT_LOCAL = '/Users/gregshepley/code/projects/blogsite_project/blogsite'
         BASE_DIR_LOCAL = '/Users/gregshepley/code/projects/blogsite_project/blogsite'
         BASE_DIR_LIVE = '/home/gregname/gregshepley.com/blogsite_project/blogsite'
         BASE_DIR_STAGING = '/home/gregstage/staging.gregshepley.com/blogsite_project/blogsite'

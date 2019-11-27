@@ -47,5 +47,6 @@ class SettingsTest(TestCase):
         	static_root(BASE_DIR_LOCAL),
         	STATIC_ROOT_LOCAL)
 
+
     def test_static_root_correct_for_staging(self):
         STATIC_ROOT_STAGE = '/home/gregstage/staging.gregshepley.com/public/static'

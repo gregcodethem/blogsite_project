@@ -3,7 +3,7 @@ from django.test import TestCase
 
 from blogsite.settings.production import STATIC_ROOT
 from blogsite.settings.base import BASE_DIR
-from bolgsite.settings.utils import identifies_production_or_local
+from blogsite.settings.utils import identifies_production_or_local
 
 # Create your tests here.
 class SettingsTest(TestCase):

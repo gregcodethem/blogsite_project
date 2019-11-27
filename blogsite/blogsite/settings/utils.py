@@ -18,5 +18,9 @@ def static_root(base_url):
             'public',
             'static',
         )
+        return static_root
+    elif identifies_production_or_local(base_url) is 'local':
+    	return base_url
     else:
-    	pass
+    	return "Error - base_url from settings can't be identified"
+

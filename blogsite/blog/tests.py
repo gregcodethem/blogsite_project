@@ -3,7 +3,6 @@ from django.test import TestCase
 
 from blogsite.settings.production import STATIC_ROOT
 from blogsite.settings.base import BASE_DIR
-from blogsite.settings.production import WEB_BASE_DIR
 from bolgsite.settings.utils import identifies_production_or_local
 
 # Create your tests here.
@@ -29,7 +28,10 @@ class SettingsTest(TestCase):
 	def test_static_root_correct_for_production(self):
 		
 		STATIC_ROOT_LIVE = '/home/gregname/gregshepley.com/public/static'
-		self.assertEqual(STATIC_ROOT, STATIC_ROOT_LIVE)
+		
+		self.assertEqual(
+			static_root(BASE_DIR),
+			STATIC_ROOT_LIVE)
 
 	def test_static_root_correct_for_staging(self):
 		STATIC_ROOT_STAGE = '/home/gregstage/staging.gregshepley.com/public/static'

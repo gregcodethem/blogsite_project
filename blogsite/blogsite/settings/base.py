@@ -15,7 +15,7 @@ import os
 
 PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE_DIR = os.path.dirname(PROJECT_DIR)
-
+wbd = os.path.dirname(os.path.dirname(BASE_DIR))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
@@ -171,11 +171,12 @@ STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesSto
 #STATIC_ROOT = '/home/gregname/gregshepley.com/public/static'
 STATIC_URL = '/static/'
 #STATIC_URL = 'http://www.gregshepley.com/blogsite_project/blogsite/static/'
+STATIC_ROOT = os.path.join(wbd, 'public','media')
 
 #MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 #MEDIA_ROOT = '/home/gregname/gregshepley.com/public/media'
 MEDIA_URL = '/media/'
-
+MEDIA_ROOT = os.path.join(wbd, 'public', 'static')
 
 # Wagtail settings
 

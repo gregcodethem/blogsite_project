@@ -168,9 +168,14 @@ STATICFILES_DIRS = [
 # See https://docs.djangoproject.com/en/2.2/ref/contrib/staticfiles/#manifeststaticfilesstorage
 STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
 
+WEB_BASE_DIR = os.path.dirname(os.path.dirname(BASE_DIR))
+
 #STATIC_ROOT = '/home/gregname/gregshepley.com/public/static'
 STATIC_URL = '/static/'
 #STATIC_URL = 'http://www.gregshepley.com/blogsite_project/blogsite/static/'
+MEDIA_ROOT = os.path.join(WEB_BASE_DIR, 'public', 'media')
+STATIC_ROOT = os.path.join(WEB_BASE_DIR, 'public', 'static')
+
 
 #MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 #MEDIA_ROOT = '/home/gregname/gregshepley.com/public/media'

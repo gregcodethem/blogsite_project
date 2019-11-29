@@ -2,7 +2,7 @@ from .base import *
 from .env import SECRET_KEY
 
 
-DEBUG = True
+DEBUG = False
 
 try:
     from .local import *

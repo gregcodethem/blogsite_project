@@ -1,7 +1,6 @@
 from .base import *
 from .env import SECRET_KEY
 
-
 DEBUG = False
 
 try:

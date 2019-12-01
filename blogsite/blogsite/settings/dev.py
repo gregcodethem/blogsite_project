@@ -11,11 +11,6 @@ ALLOWED_HOSTS = ['*']
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-#STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-STATIC_ROOT = '/home/gregstage/staging.gregshepley.com/public/static'
-
 
 try:
     from .local import *

@@ -21,13 +21,15 @@ Delete the line below if you're just getting started and want to remove the welc
 	  <!-- Page Content -->
 
   <!-- Header -->
-  <header class="bg-light py-5 mb-5">
+  <header class="bg-light py-2 mb-4">
     <div class="container h-100">
       <div class="row h-100 align-items-center">
         <div class="col-lg-12">
-          <h1 class="display-4 text-dark mt-5 mb-2">{{ social_media_setting.hero_title }}</h1>
-          <div class="lead mb-5 text-dark-50">{{ social_media_setting.hero_lead|richtext }}</div>
-          <a href="{{ social_media_setting.hero_cta_url }}" class="btn btn-primary">{{ social_media_setting.hero_cta_text }}</a>
+          <h1 class="display-4 text-dark mt-2 mb-2">{{ social_media_setting.hero_title }}</h1>
+          <div class="lead mb-3 text-dark-50">{{ social_media_setting.hero_lead|richtext }}</div>
+          <div class="mb-3">
+            <a href="{{ social_media_setting.hero_cta_url }}" class="btn btn-primary">{{ social_media_setting.hero_cta_text }}</a>
+          </div>
         </div>
       </div>
     </div>

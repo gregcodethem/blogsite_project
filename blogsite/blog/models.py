@@ -133,6 +133,17 @@ class BlogPage(RoutablePageMixin, Page):
             self.search_type = 'search'
         return Page.serve(self, request, *args, **kwargs)
 
+class CategoryPage(BlogPage):
+
+    def get_context(self, request, *args, **kwargs):
+        context = super(BlogPage, self).get_context(request, *args, **kwargs)
+        context['posts'] = self.posts
+        context['blog_page'] = self
+        context['menuitems'] = self.get_children().filter(
+            live=True, show_in_menus=True)
+        return context
+
+
 
 class PostPage(Page):
     body = MarkdownField()
